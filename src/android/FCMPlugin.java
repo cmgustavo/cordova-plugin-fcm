@@ -146,6 +146,18 @@ public class FCMPlugin extends CordovaPlugin {
 					}
 				});
 			}
+			else if (action.equals("setCurrentScreen")) {
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						try{
+                            setCurrentScreen(callbackContext, args.getString(0));
+							callbackContext.success();
+						}catch(Exception e){
+							callbackContext.error(e.getMessage());
+						}
+					}
+				});
+			}
                         else if (action.equals("clearAllNotifications")) {
 				cordova.getThreadPool().execute(new Runnable() {
 					public void run() {
@@ -261,6 +273,19 @@ public class FCMPlugin extends CordovaPlugin {
             public void run() {
               try {
                 mFirebaseAnalytics.setUserProperty(name, value);
+                callbackContext.success();
+              } catch (Exception e) {
+                callbackContext.error(e.getMessage());
+              }
+            }
+          });
+        }
+
+		public void setCurrentScreen(final CallbackContext callbackContext, final Activity activity, final String screenName, final String screenClassOverride) {
+          cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+              try {
+                mFirebaseAnalytics.setCurrentScreen(null, screenName, null);
                 callbackContext.success();
               } catch (Exception e) {
                 callbackContext.error(e.getMessage());
