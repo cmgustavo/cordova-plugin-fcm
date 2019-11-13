@@ -56,14 +56,9 @@ FCMPlugin.prototype.setUserProperty = function(name, value, success, error){
   exec(success, error, 'FCMPlugin', 'setUserProperty', [name, value]);
 }
 
-// iOS
+
 FCMPlugin.prototype.setScreenName = function(screenName, success, error){
 	exec(success, error, 'FCMPlugin', 'setScreenName', [screenName]);
-}
-
-// Android
-FCMPlugin.prototype.setCurrentScreen = function(screenName, success, error){
-exec(success, error, 'FCMPlugin', 'setCurrentScreen', [screenName]);
 }
 
 // FIRE READY //

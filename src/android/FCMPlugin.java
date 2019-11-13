@@ -146,11 +146,11 @@ public class FCMPlugin extends CordovaPlugin {
 					}
 				});
 			}
-			else if (action.equals("setCurrentScreen")) {
+			else if (action.equals("setScreenName")) {
 				cordova.getThreadPool().execute(new Runnable() {
 					public void run() {
 						try{
-                            setCurrentScreen(callbackContext, args.getString(0));
+                            setScreenName(callbackContext, args.getString(0));
 							callbackContext.success();
 						}catch(Exception e){
 							callbackContext.error(e.getMessage());
@@ -281,7 +281,7 @@ public class FCMPlugin extends CordovaPlugin {
           });
         }
 
-		public void setCurrentScreen(final CallbackContext callbackContext, final Activity activity, final String screenName, final String screenClassOverride) {
+		public void setScreenName(final CallbackContext callbackContext, final Activity activity, final String screenName, final String screenClassOverride) {
           cordova.getThreadPool().execute(new Runnable() {
             public void run() {
               try {
