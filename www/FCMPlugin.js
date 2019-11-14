@@ -56,7 +56,6 @@ FCMPlugin.prototype.setUserProperty = function(name, value, success, error){
   exec(success, error, 'FCMPlugin', 'setUserProperty', [name, value]);
 }
 
-
 FCMPlugin.prototype.setScreenName = function(screenName, success, error){
 	exec(success, error, 'FCMPlugin', 'setScreenName', [screenName]);
 }

@@ -281,18 +281,18 @@ public class FCMPlugin extends CordovaPlugin {
           });
         }
 
-		public void setScreenName(final CallbackContext callbackContext, final Activity activity, final String screenName, final String screenClassOverride) {
-          cordova.getThreadPool().execute(new Runnable() {
+		public void setScreenName(final CallbackContext callbackContext, final String screenName) {
+		  cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-              try {
-                mFirebaseAnalytics.setCurrentScreen(null, screenName, null);
-                callbackContext.success();
-              } catch (Exception e) {
-                callbackContext.error(e.getMessage());
-              }
+                try {
+                    mFirebaseAnalytics.setCurrentScreen(cordova.getActivity(), screenName, null);
+                    callbackContext.success();
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
             }
           });
-        }
+    	}
 
         public void clearAllNotifications(final CallbackContext callbackContext) {
           cordova.getThreadPool().execute(new Runnable() {
