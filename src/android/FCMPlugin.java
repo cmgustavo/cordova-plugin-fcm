@@ -166,6 +166,18 @@ public class FCMPlugin extends CordovaPlugin {
 					}
 				});
 			}
+			else if (action.equals("setScreenName")) {
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						try{
+                            setScreenName(callbackContext, args.getString(0));
+							callbackContext.success();
+						}catch(Exception e){
+							callbackContext.error(e.getMessage());
+						}
+					}
+				});
+			}
                         else if (action.equals("clearAllNotifications")) {
 				cordova.getThreadPool().execute(new Runnable() {
 					public void run() {
@@ -288,6 +300,19 @@ public class FCMPlugin extends CordovaPlugin {
             }
           });
         }
+
+		public void setScreenName(final CallbackContext callbackContext, final String screenName) {
+		  cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                try {
+                    mFirebaseAnalytics.setCurrentScreen(cordova.getActivity(), screenName, null);
+                    callbackContext.success();
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+            }
+          });
+    	}
 
         public void clearAllNotifications(final CallbackContext callbackContext) {
           cordova.getThreadPool().execute(new Runnable() {

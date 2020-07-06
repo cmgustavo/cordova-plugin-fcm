@@ -56,6 +56,10 @@ FCMPlugin.prototype.setUserProperty = function(name, value, success, error){
   exec(success, error, 'FCMPlugin', 'setUserProperty', [name, value]);
 }
 
+FCMPlugin.prototype.setScreenName = function(screenName, success, error){
+	exec(success, error, 'FCMPlugin', 'setScreenName', [screenName]);
+}
+
 // FIRE READY //
 exec(function(result){ console.log("FCMPlugin NG Ready OK") }, function(result){ console.log("FCMPlugin Ready ERROR") }, "FCMPlugin",'ready',[]);
 
